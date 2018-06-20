@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="google" value="notranslate">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cake Blockly for C 語言</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.terminal.css">
+  </head>
+  <body onload="start()">
+    <div class="header">
+      <nav class="navbar navbar-default">
+        <div class="collapse navbar-collapse">
+          <a class="navbar-brand" href="index_en.html"><b>Cake Blockly for C 語言 v1.0:  </b></a>  
+          <input id="program_name" class="navbar-brand program_name" type="text" value="example.c">     
+          <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default navbar-btn" onclick="loadXmlBlocks()">
+              <span class="glyphicon glyphicon-folder-open"></span> 開啟積木程式
+              </button>
+              <input type="file" id="load" style="display: none;"/> 
+              <button type="button" class="btn btn-default navbar-btn" onclick="saveXmlBlocks()">
+              <span class="glyphicon glyphicon-floppy-disk"></span> 儲存積木程式
+              </button>
+              <button type="button" class="btn btn-default navbar-btn" onclick="discard()">
+              <span class="glyphicon glyphicon-trash"></span> 清除工作區
+              </button>
+              <button type="button" class="btn btn-default navbar-btn" onclick="downloadCode()">
+              <span class="glyphicon glyphicon-download-alt"></span> 下載 C 程式
+              </button>
+            </div>
+            <p class="navbar-brand"><span style="font-size: 10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中文版開發者: 陳會安 2018</span></p>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="container">
+      <div id="main-wrapper" class="row">
+        <div class="col-xs-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Blockly 積木程式工作區</h3>
+            </div>
+            <div id="blocklyDiv" class="panel-body"></div>
+          </div>
+        </div>
+        <xml id="toolbox">
+            <category name="變數">
+                <category name="變數">
+                    <block type="variables_declare">
+                        <value name="VALUE">
+                            <block type="math_number">
+                                <field name="NUM">1</field>
+                            </block>
+                        </value>                    
+                    </block>
+                    <block type="variables_get"></block>
+                    <block type="variables_set">
+                        <value name="VALUE">
+                            <block type="math_number">
+                                <field name="NUM">1</field>
+                            </block>
+                        </value>                        
+                    </block>
+                    <block type="library_stdio_text_char"></block>
+                    <block type="math_number"></block>
+                </category>
+                <category name="指標">
+                    <block type="variables_pointer_declare">
+                        <value name="VALUE">
+                            <block type="logic_null"></block>
+                        </value>                    
+                    </block>
+                    <block type="variables_pointer_get"></block>
+                    <block type="variables_pointer_set">
+                        <value name="VAR">
+                            <block type="variables_pointer_get">
+                            </block>
+                        </value>
+                        <value name="VALUE">
+                            <block type="variables_pointer_&">
+                                 <value name="VALUE">
+                                     <block type="variables_get">
+                                     </block>
+                                 </value> 
+                            </block>
+                        </value>
+                    </block>
+                    <block type="variables_pointer_&"></block>
+                    <block type="variables_pointer_*"></block>
+                </category>
+                <category name="陣列">
+                    <block type="variables_array_declare">
+                        <value name="LENGTH_1">
+                            <block type="math_number">
+                                <field name="NUM">3</field>
+                            </block>
+                        </value>
+                    </block>
+                    <block type="variables_array_initial"></block>
+                    <block type="variables_array_get">
+                        <value name="LENGTH_1">
+                            <block type="math_number">
+                                <field name="NUM">0</field>
+                            </block>
+                        </value>
+                    </block>
+                    <block type="variables_array_set">
+                        <value name="LENGTH_1">
+                            <block type="math_number">
+                                <field name="NUM">0</field>
+                            </block>
+                        </value>
+                        <value name="VALUE">
+                            <block type="math_number">
+                                <field name="NUM">1</field>
+                            </block>
+                        </value>
+                    </block>
+                    <block type="variables_array_pointer"></block>
+                    <block type="variables_string_declare">
+                        <value name="LENGTH_1">
+                            <block type="math_number">
+                                <field name="NUM">15</field>
+                            </block>
+                        </value>
+                        <value name="VALUE">
+                            <block type="library_stdio_text">
+                                <field name="TEXT">hello! world!</field>
+                            </block>
+                        </value>
+                    </block>
+                    <block type="library_stdio_text_char"></block>                    
+                    <block type="variables_string_null"></block>
+                </category>
+            </category>
+            <category name="運算">
+                <block type="math_number"></block>
+                <block type="math_arithmetic"></block>
+                <block type="math_modulo"></block>
+                <block type="math_convert_type"></block>
+                <block type="math_auto_convert_type"></block>
+                <block type="math_increment_expression"></block>
+                <block type="math_decrement_expression"></block>
+                <block type="math_prev_inc_decrement"></block>
+                <block type="math_post_inc_decrement"></block>
+            </category>
+            <category name="輸出">
+                <block type="library_stdio_printf"></block>
+                <block type="library_stdio_text"></block>
+                <block type="library_stdio_newLine"></block>
+                <block type="library_stdio_tab"></block>
+                <block type="math_number"></block>
+            </category>
+            <category name="輸入">
+                <block type="library_stdio_scanf">
+                    <value name="VAR0">
+                       <block type="variables_get">
+                       </block>
+                    </value> 
+                </block>            
+            </category>            
+            <category name="條件">
+                <block type="controls_if"></block>
+                <block type="controls_switch"></block>
+                <block type="controls_switch_break"></block>
+                <block type="logic_ternary"></block>
+            </category>
+            <category name="迴圈">
+                <block type="controls_whileUntil"></block>
+                <block type="controls_doWhile"></block>
+                <block type="controls_for">
+                        <value name="FROM">
+                            <block type="math_number">
+                                <field name="NUM">1</field>
+                            </block>
+                        </value>
+                        <value name="TO">
+                            <block type="math_number">
+                                <field name="NUM">10</field>
+                            </block>
+                        </value>
+                        <value name="BY">
+                            <block type="math_number">
+                                <field name="NUM">1</field>
+                            </block>
+                        </value>                        
+                </block>
+                <block type="controls_flow_statements"></block>
+            </category>
+            <category name="邏輯">
+                <block type="logic_compare"></block>
+                <block type="logic_operation"></block>
+                <block type="logic_negate"></block>
+                <block type="logic_boolean"></block>
+                <block type="logic_null"></block>
+            </category>
+            <category name="函數" custom="PROCEDURE">                
+                <block type="procedures_defnoreturn"></block>
+                <block type="procedures_defreturn"></block>
+                <block type="procedures_return"></block>
+            </category>
+            </category>
+    <!--        <category name="結構" custom="STRUCTURE">
+                <block type="structure_define"></block>
+                <block type="structure_declare"></block>
+            </category>   -->
+            <category name="函數庫">
+                <category name="標準函數庫 stdlib.h">
+                    <block type="library_stdlib_abs"></block>
+                    <block type="library_stdlib_convert"></block>
+                    <block type="library_stdlib_rand">
+                        <value name="VAR">
+                            <block type="library_stdlib_rand_scope">
+                                <value name="A">
+                                    <block type="library_stdlib_number_forRandScope1"></block>
+                                </value>
+                                <value name="B">
+                                    <block type="library_stdlib_number_forRandScope100"></block>
+                                </value>
+                            </block>
+                        </value>
+                    </block>
+                    <block type="library_stdlib_malloc">
+                        <value name="VAR">
+                            <block type="library_stdlib_arithmetic_forMalloc">
+                                <value name="A">
+                                    <block type="library_stdlib_sizeof_forMalloc"></block>
+                                </value>
+                                <value name="B">
+                                    <block type="library_stdlib_number_forMalloc"></block>
+                                </value>
+                            </block>
+                        </value>
+                    </block>
+                    <block type="library_stdlib_arithmetic_forMalloc">
+                        <value name="A">
+                            <block type="library_stdlib_sizeof_forMalloc"></block>
+                        </value>
+                        <value name="B">
+                            <block type="library_stdlib_number_forMalloc"></block>
+                        </value>
+                    </block>
+                    <block type="library_stdlib_free"></block>
+                    <block type="library_stdlib_exit"></block>
+                </category>
+                <category name="字串 string.h">
+                    <block type="library_string_strlen"></block>
+                    <block type="library_string_strcat"></block>
+                    <block type="library_string_strcpy"></block>
+                    <block type="library_string_strcmp"></block>
+                </category>
+                <category name="數學 math.h">
+                    <block type="library_math_abs"></block>
+                    <block type="library_math_trig"></block>
+                    <block type="library_math_logs"></block>
+                    <block type="library_math_pow"></block>
+                    <block type="library_math_exp"></block>
+                    <block type="library_math_sqrt"></block>
+                    <block type="library_math_round"></block>
+                    <block type="library_math_numcheck"></block>
+                    <block type="library_math_numcompare"></block>
+                </category>
+                <category name="時間 time.h">
+                    <block type="library_time_current"></block>
+                    <block type="library_time_requiredTime"></block>
+                </category>
+            </category>
+   <!--         <category name="巨集">
+                <block type="define_declare"></block>
+                <block type="define_get"></block>
+                <block type="library_stdio_text"></block>
+                <block type="math_number"></block>                
+            </category>     -->       
+            <category name="註解">
+                <block type="comment">
+                    <value name="VAR0">
+                        <block type="library_stdio_text"></block>
+                    </value>
+                </block>
+                <block type="library_stdio_text"></block>
+            </category>
+        </xml>
+        <div class="col-xs-4">
+          <div id="code-wrapper" class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">C 語言程式碼</h3>
+            </div>
+            <pre id="code" class="panel-body"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" role="contentinfo">
+    </footer>
+    <script type="text/javascript" src="blockly_compressed.js"></script>
+    <script type="text/javascript" src="blocks_compressed.js"></script>
+    <script type="text/javascript" src="cake_compressed.js"></script>
+    <script type="text/javascript" src="msg/js/zh-hant.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
+    <script type="text/javascript" src="js/FileSaver.js"></script>
+    <script type="text/javascript" src="js/prettify.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+    <!-- Load the Google Drive SDK Realtime libraries. -->
+   <!-- <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>     -->
+  </body>
+</html>
