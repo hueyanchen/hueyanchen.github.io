@@ -10,6 +10,46 @@
     <link rel="stylesheet" type="text/css" href="css/prettify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.terminal.css">
+         <style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
   </head>
   <body onload="start()">
     <div class="header">
@@ -297,6 +337,25 @@
     </div>
     <footer id="footer" role="contentinfo">
     </footer>
+     <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p><center>
+           <table>                                    
+           <tr>
+            <td style="padding: 5px"><img src="https://cf-assets1.tenlong.com.tw/images/100638/original/635933682863050540.jpg" height="300" width="220"></td>
+            <td style="padding: 5px"><img src="https://cf-assets1.tenlong.com.tw/images/99921/original/04A89007.JPG" height="300" width="220"></td>
+            <td style="padding: 5px"><img src="https://cf-assets1.tenlong.com.tw/images/110162/original/04C05007.JPG" height="300" width="220"></td>
+            <td style="padding: 5px"><img src="https://cf-assets2.tenlong.com.tw/products/images/000/106/856/original/9789863124245_bc.jpg?1525538998" height="300" width="220"></td>
+            <td style="padding: 5px"><img src="https://cf-assets2.tenlong.com.tw/products/images/000/108/273/original/9789863124504_bc.jpg?1525539400" height="300" width="220"></td>
+           </tr>            
+           </table></center>
+        </p>
+      </div>
+    </div>
+    
+    
     <script type="text/javascript" src="blockly_compressed.js"></script>
     <script type="text/javascript" src="blocks_compressed.js"></script>
     <script type="text/javascript" src="cake_compressed.js"></script>
