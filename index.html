@@ -317,5 +317,27 @@
 <script type=text/javascript src=js/FileSaver.js></script>
 <script type=text/javascript src=js/prettify.js></script>
 <script type=text/javascript src=js/jquery.mousewheel.min.js></script>
+  <!-- ===== 新增以下修復腳本 ===== -->
+    <script type="text/javascript">
+      // 1. 修復 F12 才能拉積木的問題 (強制重新計算 SVG 畫布座標)
+      function fixBlocklySize() {
+        if (typeof Blockly !== 'undefined' && Blockly.mainWorkspace) {
+          Blockly.svgResize(Blockly.mainWorkspace);
+        }
+      }
+
+      // 當視窗大小改變時主動更新
+      window.addEventListener('resize', fixBlocklySize, false);
+
+      // 頁面完全載入後，延遲 200ms 強制觸發一次 resize
+      window.addEventListener('load', function() {
+        setTimeout(fixBlocklySize, 200);
+      });
+
+      // 2. 修復 Console 404 音效檔問題 (補齊正確的 media 路徑)
+      if (typeof Blockly !== 'undefined') {
+        Blockly.pathToMedia = 'media/'; 
+      }
+    </script>
 </body>
 </html>
