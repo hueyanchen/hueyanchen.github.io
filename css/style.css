@@ -96,6 +96,9 @@
   height: 300px;
 }
 #blocklyDiv {
+  /* 必須設定定位屬性，Blockly 才能正確計算座標 */
+  position: relative; 
+  width: 100%;
   /* height: auto; */
   height: -moz-calc(100vh - 150px);     /* Firefox  */
   height: -webkit-calc(100vh - 150px);  /* WebKit   */
