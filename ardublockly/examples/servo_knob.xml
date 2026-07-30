@@ -1,0 +1,56 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="H`4zhs)Dspt.X@f*UmZk" x="24" y="-106">
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="384" inline="true">
+        <field name="VAR">val</field>
+        <value name="VALUE">
+          <block type="io_analogread" id="393">
+            <value name="PIN">
+              <block type="io_analogpin" id="I|KbX_6jGF+k+uJ*|.Yf">
+                <field name="PIN">A0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="397" inline="true">
+            <field name="VAR">val</field>
+            <value name="VALUE">
+              <block type="base_map" id="416">
+                <value name="NUM">
+                  <block type="variables_get" id="420">
+                    <field name="VAR">val</field>
+                  </block>
+                </value>
+                <value name="DMAX">
+                  <block type="math_number" id="439">
+                    <field name="NUM">180</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="servo_write" id="370">
+                <field name="SERVO_PIN">9</field>
+                <value name="SERVO_ANGLE">
+                  <block type="variables_get" id="443">
+                    <field name="VAR">val</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="time_delay" id="450">
+                    <value name="DELAY_TIME_MILI">
+                      <block type="math_number" id="451">
+                        <field name="NUM">15</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

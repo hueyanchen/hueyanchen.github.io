@@ -1,0 +1,65 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="stepper_config" id="1" inline="false" x="47" y="-149">
+    <mutation number_of_pins="TWO"></mutation>
+    <field name="STEPPER_NAME">MyStepper</field>
+    <field name="STEPPER_NUMBER_OF_PINS">TWO</field>
+    <field name="STEPPER_PIN1">8</field>
+    <field name="STEPPER_PIN2">9</field>
+    <value name="STEPPER_STEPS">
+      <block type="math_number" id="2">
+        <field name="NUM">100</field>
+      </block>
+    </value>
+    <value name="STEPPER_SPEED">
+      <block type="math_number" id="3">
+        <field name="NUM">30</field>
+      </block>
+    </value>
+  </block>
+  <block type="arduino_functions" id="sk__iI|A:m0E4!TUBu+d" x="50" y="-9">
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="5" inline="true">
+        <field name="VAR">val</field>
+        <value name="VALUE">
+          <block type="io_analogread" id="6">
+            <value name="PIN">
+              <block type="io_analogpin" id="eJ]k~tA!Y%U:RB.=V4~7">
+                <field name="PIN">A0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="stepper_step" id="7" inline="true">
+            <field name="STEPPER_NAME">MyStepper</field>
+            <value name="STEPPER_STEPS">
+              <block type="math_arithmetic" id="8">
+                <field name="OP">MINUS</field>
+                <value name="A">
+                  <block type="variables_get" id="9">
+                    <field name="VAR">val</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="10">
+                    <field name="VAR">previous</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="11" inline="true">
+                <field name="VAR">previous</field>
+                <value name="VALUE">
+                  <block type="variables_get" id="12">
+                    <field name="VAR">val</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
